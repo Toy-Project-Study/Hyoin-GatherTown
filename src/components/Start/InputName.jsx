@@ -1,14 +1,27 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { userImages } from "../../assets/index";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const InputName = () => {
-  function handleStart() {
-    //이름을 선택하지 않거나, 캐릭터 미선택시 넘어가지 못하도록
-  }
+  let navigate = useNavigate();
+  const [submitForm, setSubmitForm] = useState("");
+  const [selectChar, setSelectChar] = useState(false);
+  const handleSubmit = (e) => {
+    setSubmitForm(e.target.value);
+  };
+
+  const handleStart = () => {
+    if (submitForm === "" || selectChar !== true) {
+      alert("캐릭터 또는 이름을 입력하세요");
+    } else if (submitForm !== "" && selectChar === true) {
+      navigate("/main");
+    }
+    setSubmitForm("");
+  };
   const selectRef = useRef();
   const onClickCharacter = (e) => {
+    setSelectChar(true);
     const selectedCharacter = e.target.closest("div");
     const selectedCharacterSrc = e.target.closest("img").src;
     sessionStorage.setItem("character", selectedCharacter);
@@ -45,10 +58,8 @@ const InputName = () => {
         </Option>
       </div>
       <ProfileInput>
-        <input placeholder="이름을 입력하세요"></input>
-        <Link to="/main">
-          <Button onClick={handleStart}>시작하기</Button>
-        </Link>
+        <input placeholder="이름을 입력하세요" onChange={handleSubmit}></input>
+        <Button onClick={handleStart}>시작하기</Button>
       </ProfileInput>
       <div>원하시는 캐릭터와 이름을 입력하신 후, 시작하기 버튼을 눌러주세요!</div>
     </StyledRoot>
