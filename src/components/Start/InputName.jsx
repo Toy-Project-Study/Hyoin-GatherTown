@@ -1,14 +1,49 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
+import { userImages } from "../../assets/index";
 import { Link } from "react-router-dom";
 
 const InputName = () => {
   function handleStart() {
     //이름을 선택하지 않거나, 캐릭터 미선택시 넘어가지 못하도록
   }
+  const selectRef = useRef();
+  const onClickCharacter = (e) => {
+    const selectedCharacter = e.target.closest("div");
+    const selectedCharacterSrc = e.target.closest("img").src;
+    sessionStorage.setItem("character", selectedCharacter);
+    selectRef.current.src = selectedCharacterSrc;
+  };
   return (
     <StyledRoot>
-      <ProfileImg></ProfileImg>
+      <p>원하시는 토토로 캐릭터를 선택해주세요!</p>
+      <SelectCharacter ref={selectRef}></SelectCharacter>
+      <div style={{ display: "flex", flexWrap: "wrap" }} onClick={onClickCharacter}>
+        <Option value="ninja">
+          <img className="image__group" src={userImages.ninja.stand.default} />
+        </Option>
+        <Option value="mario">
+          <img className="image__group" src={userImages.mario.stand.default} />
+        </Option>
+        <Option value="orange">
+          <img className="image__group" src={userImages.orange.stand.default} />
+        </Option>
+        <Option value="jiwoo">
+          <img className="image__group" src={userImages.jiwoo.stand.default} />
+        </Option>
+        <Option value="pig">
+          <img className="image__group" src={userImages.pig.stand.default} />
+        </Option>
+        <Option value="superman">
+          <img className="image__group" src={userImages.superman.stand.default} />
+        </Option>
+        <Option value="gentleman">
+          <img className="image__group" src={userImages.gentleman.stand.default} />
+        </Option>
+        <Option value="foreigner">
+          <img className="image__group" src={userImages.foreigner.stand.default} />
+        </Option>
+      </div>
       <ProfileInput>
         <input placeholder="이름을 입력하세요"></input>
         <Link to="/main">
@@ -34,13 +69,32 @@ const StyledRoot = styled.div`
     color: white;
     font-size: 20px;
   }
+  & > p {
+    font-size: 15px;
+    margin: 20px;
+  }
+
+  .image {
+    display: flex;
+    &__group {
+      width: 80px;
+      height: 100px;
+      cursor: pointer;
+    }
+  }
 `;
 
-const ProfileImg = styled.img`
+const SelectCharacter = styled.img`
+  height: 120px;
   width: 100px;
-  height: 100px;
-  background-color: #ebeeff;
-  border-radius: 30px;
+  border-radius: 20px;
+  border: 1px solid #90acff;
+  background-color: #90acff;
+`;
+
+const Option = styled.div`
+  height: 60px;
+  text-align: center;
 `;
 
 const ProfileInput = styled.div`
