@@ -14,4 +14,5 @@ export default Main;
 
 const Wrapper = styled.div`
   background-color: rgb(40, 46, 78);
+  margin-top: 45px;
 `;
