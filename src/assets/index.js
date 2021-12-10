@@ -24,3 +24,5 @@ export const userImages = {
     stand: require("./images/totoro06.png"),
   },
 };
+
+export { default as backgroundMap } from "./maps/causalHQ.png";
