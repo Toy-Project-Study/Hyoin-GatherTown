@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { backgroundMap } from "../../assets/index";
-import totoro from "../../assets/images/totoro01.png";
+import totoro from "../../assets/images/totoro02.png";
 import styled from "styled-components";
 
 //canvas의 가로/세로 최대값 설정
@@ -11,7 +11,7 @@ const MAX_CANVAS_KEY_LEFT = 37;
 const MAX_CANVAS_KEY_DOWN = 38;
 const MAX_CANVAS_KEY_RIGHT = 39;
 const MAX_CANVAS_KEY_UP = 40;
-const MAX_CANVAS_SPEED = 10;
+const MAX_CANVAS_SPEED = 8;
 const MAX_CANVAS_FRAMES_LENGTH = 23;
 
 const Map = () => {
@@ -41,7 +41,7 @@ const Map = () => {
       canvas.height = window.innerHeight;
       totoroImage.style.width = "100px";
       totoroImage.style.height = "120px";
-      context.drawImage(totoroImage, positionRef.current.x, positionRef.current.y);
+      context.drawImage(totoroImage, positionRef.current.x, positionRef.current.y, 80, 100);
     };
 
     console.log("콘솔", totoroImage.width);
@@ -89,9 +89,7 @@ const Map = () => {
         style={{
           backgroundImage: `url(${backgroundMap})`,
           backgroundSize: "cover",
-        }}>
-        {/* <img className="totoroImg" src={totoro} alt="" /> */}
-      </canvas>
+        }}></canvas>
     </StyledRoot>
   );
 };
